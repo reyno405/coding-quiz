@@ -1,3 +1,4 @@
+// these will be all the called variables
 var quizBody = document.getElementById("quiz");
 var resultsEl = document.getElementById("result");
 var finalScoreEl = document.getElementById("finalScore");
@@ -19,8 +20,9 @@ var buttonC = document.getElementById("c");
 var buttonD = document.getElementById("d");
 
 
-
-var quizQuestion = [{
+// these will be the questions and correct answers to the quiz
+var quizQuestion = [
+    {
     question: "How many CSS properties can be in one stylesheet?",
     choiceA: "1",
     choiceB: "2",
@@ -51,16 +53,65 @@ var quizQuestion = [{
    {
     question: "Where in an HTML document is the correct place to refer to an external style sheet?",
     choiceA: "In the end of the document",
-    choiceB: "In the <body> section",
-    choiceC: "In the <head> section",
-    choiceD: "In the <body> section",
+    choiceB: "In the body section",
+    choiceC: "In the head section",
+    choiceD: "In the body section",
     correctAnswer: "c"},
    {
     question: "Inside which HTML element do we put the JavaScript?",
-    choiceA: "<js>",
-    choiceB: "<script>",
-    choiceC: "<javascript>",
-    choiceD: "<scripting>",
+    choiceA: "js",
+    choiceB: "script",
+    choiceC: "javascript",
+    choiceD: "scripting",
     correctAnswer: "b"},
+
+    ];
+
+var finalQuestionIndex = quizQuestion.length;
+var currentQuestionIndex = 0;
+var timeleft = 76;
+var timerInterval;
+var score = 0;
+var correct;
+
+
+// this function will cycle though the objects with the questions
+function generateQuizQuestion(){
+    gameoverDiv.style.display = "none";
+    if (currentQuestionIndex === finalQuestionIndex){
+        return showScore();
+    } 
+    var currentQuestion = quizQuestion[currentQuestionIndex];
+    questionsEl.innerHTML = "<p>" + currentQuestion.question + "</p>";
+    buttonA.innerHTML = currentQuestion.choiceA;
+    buttonB.innerHTML = currentQuestion.choiceB;
+    buttonC.innerHTML = currentQuestion.choiceC;
+    buttonD.innerHTML = currentQuestion.choiceD;
+};
+
+// Start Quiz function starts the TimeRanges, hides the start button, and displays the first quiz question.
+function startQuiz(){
+    gameoverDiv.style.display = "none";
+    startQuizDiv.style.display = "none";
+    generateQuizQuestion();
+
+    //Timer
+    timerInterval = setInterval(function() {
+        timeleft--;
+        quizTimer.textContent = "Time left: " + timeleft;
     
-];
+        if(timeleft === 0) {
+          clearInterval(timerInterval);
+          showScore();
+        }
+      }, 1000);
+    quizBody.style.display = "block";
+}
+// This function is the end page screen that displays your score after either completeing the quiz or upon timer run out
+function showScore(){
+    quizBody.style.display = "none"
+    gameoverDiv.style.display = "flex";
+    clearInterval(timerInterval);
+    highscoreInputName.value = "";
+    finalScoreEl.innerHTML = "You got " + score + " out of " + quizQuestion.length + " correct!";
+}

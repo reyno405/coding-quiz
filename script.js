@@ -115,3 +115,23 @@ function showScore(){
     highscoreInputName.value = "";
     finalScoreEl.innerHTML = "You got " + score + " out of " + quizQuestion.length + " correct!";
 }
+
+submitScoreBtn.addEventListener("click", function highscore(){
+    
+    if(highscoreInputName.value === ""){
+        alert("Cannot Be Left Blank");
+        return false;
+    }else{
+        var savedHighscores = json.parse(localStorage.getItem("savedHighscores")) || [];
+        var currentUser = highscoreInputName.value.trim();
+        var currentHighscore = {
+            name: currentUser,
+            score : score
+        };
+
+    }
+
+
+
+})
+startQuizButton.addEventListener("click",startQuiz);

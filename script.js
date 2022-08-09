@@ -67,6 +67,7 @@ var quizQuestion = [
 
     ];
 
+// these will be more global variables
 var finalQuestionIndex = quizQuestion.length;
 var currentQuestionIndex = 0;
 var timeleft = 76;
@@ -128,10 +129,40 @@ submitScoreBtn.addEventListener("click", function highscore(){
             name: currentUser,
             score : score
         };
+        gameoverDiv.style.display = "none";
+        highscoreContainer.stlye.display = "flex";
+        highscoreDiv.style.display = "block";
+        endGameBtns.style.display = "flex",
+
+        savedHighscores.push(currentHighscore);
+        localStorage.setItem("savedHighscores", json.stringify(savedHighscores));
+        generateHighscores();
 
     }
 
+});
+
+function generateHighscores(){
+    highscoreDisplayName.innerHTML = "";
+    highscoreDisplayScore.innerHTML = "";
+    var highscore = json.parse(localStorage.getItem("savedHighscores")) [];
+    for (i=0; i<highscores.length; i++){
+        var newNameSpan = document.createElement("li");
+        var newScoreSpan = document.createElement("li");
+        newNameSpan.textContent = highscores[i].name;
+        newScoreSpan.textContent = highscores[i].score;
+        highscoreDisplayName.appendChild(newNameSpan);
+        highscoreDisplayScore.appendChild(newScoreSpan);
+    }
+
+}
 
 
-})
+
+
+
+
+
+
+
 startQuizButton.addEventListener("click",startQuiz);

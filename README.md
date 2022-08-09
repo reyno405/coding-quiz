@@ -34,3 +34,5 @@ THEN the game is over
 WHEN the game is over
 
 THEN I can save my initials and score
+
+[![C-Users-t6500-Documents-week-4-api-coding-quiz-index-html.png](https://i.postimg.cc/PfCZ7d3t/C-Users-t6500-Documents-week-4-api-coding-quiz-index-html.png)](https://postimg.cc/yWzkgCC5)

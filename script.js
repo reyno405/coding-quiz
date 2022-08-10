@@ -146,7 +146,7 @@ function generateHighscores(){
     highscoreDisplayName.innerHTML = "";
     highscoreDisplayScore.innerHTML = "";
     var highscore = json.parse(localStorage.getItem("savedHighscores")) [];
-    for (i=0; i<highscores.length; i++){
+    for (i=0; i<highscore.length; i++){
         var newNameSpan = document.createElement("li");
         var newScoreSpan = document.createElement("li");
         newNameSpan.textContent = highscores[i].name;
@@ -154,6 +154,19 @@ function generateHighscores(){
         highscoreDisplayName.appendChild(newNameSpan);
         highscoreDisplayScore.appendChild(newScoreSpan);
     }
+
+}
+
+
+// this function will have all the high scores displayed while the rest of the pages are hidden
+function showHighscore(){
+    startQuizDiv.style.display = "none"
+    gameoverDiv.style.display = "none";
+    highscoreContainer.style.diplay = "flex";
+    highscoreDiv.style.display = "block";
+    endGameBtns.style.diplay = "flex";
+
+    generateHighscores();
 
 }
 
